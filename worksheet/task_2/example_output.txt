@@ -1,0 +1,72 @@
+Here's an example of the output if your queries are correct - you can see the inputs used and outputs expected.
+
+Please note that your code will be tested with different data (in the same database) so DO NOT HARDCODE any values.
+
+=== Cinema Query Checker ===
+1. Customer tickets (customer_tickets)
+2. Screening sales (screening_sales)
+3. Top customers by spend (top_customers_by_spend)
+0. Exit
+Select an option: 1
+Enter customer_id: 2
+--------------------+----------+------
+Film Title          | Screen   | Price
+--------------------+----------+------
+Laugh Out Loud      | Screen 2 | 9.99 
+Shadow of the Crown | Screen 2 | 12.99
+--------------------+----------+------
+
+=== Cinema Query Checker ===
+1. Customer tickets (customer_tickets)
+2. Screening sales (screening_sales)
+3. Top customers by spend (top_customers_by_spend)
+0. Exit
+Select an option: 2
+-------------+---------------------+-------------
+Screening ID | Film Title          | Tickets Sold
+-------------+---------------------+-------------
+17           | The Smallest Giant  | 12          
+1            | Moonlight Chase     | 11          
+9            | Neon City Nights    | 10          
+15           | Stormbreakers       | 10          
+19           | Shadow of the Crown | 9           
+20           | Laugh Out Loud      | 8           
+3            | The Hidden Garden   | 7           
+13           | The Hidden Garden   | 6           
+4            | Neon City Nights    | 5           
+5            | The Hidden Garden   | 5           
+2            | The Last Horizon    | 4           
+6            | Deep Space Rescue   | 4           
+18           | Deep Space Rescue   | 4           
+11           | Shadow of the Crown | 3           
+14           | Stormbreakers       | 3           
+7            | Crimson Casefiles   | 0           
+8            | Laugh Out Loud      | 0           
+10           | Biscuit Bandits     | 0           
+12           | Shadow of the Crown | 0           
+16           | Final Frequency     | 0           
+-------------+---------------------+-------------
+
+=== Cinema Query Checker ===
+1. Customer tickets (customer_tickets)
+2. Screening sales (screening_sales)
+3. Top customers by spend (top_customers_by_spend)
+0. Exit
+Select an option: 3
+How many customers to show (limit)? 5
+--------------+------------
+Customer Name | Total Spent
+--------------+------------
+Aisha Khan    | 82.41      
+Sofia Clark   | 73.93      
+Lily Thompson | 54.94      
+Grace Smith   | 50.95      
+Priya Singh   | 50.95      
+--------------+------------
+
+=== Cinema Query Checker ===
+1. Customer tickets (customer_tickets)
+2. Screening sales (screening_sales)
+3. Top customers by spend (top_customers_by_spend)
+0. Exit
+Select an option: 0
