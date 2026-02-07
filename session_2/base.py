@@ -1,5 +1,4 @@
 import sqlite3
-# you will need to pip install pandas matplotlib
 import pandas as pd
 import matplotlib as mpl
 
@@ -9,105 +8,85 @@ def get_connection(db_path="orders.db"):
     Returns a connection object.
     """
     conn = sqlite3.connect(db_path)
-#    conn.row_factory = sqlite3.Row
+    conn.row_factory = sqlite3.Row
     return conn
 
 def First(x):
-    '''
-    Take database and query
-    '''
-
+    # Print all categories
     query = '''
             SELECT category FROM products JOIN order_items GROUP BY category
             '''
-    
     result = x.execute(query)
+    print('')
 
-    written = result.fetchone()
-
-    if written:
-        print(written)
+    if result:
+        for a in result:
+                print(f'Category: {a[0]}')         
     else:
         print('Result not found')
-
+    
+    print('')
 
 def Second(x):
-    '''
-    Take database and query
-    '''
-
+    # Print total number of customers
     query = '''
             SELECT COUNT(customer_id)
             FROM customers;
             '''
-    
     result = x.execute(query)
-
-    written = result.fetchone()
-
-    if written:
-        print(written)
-    else:
-        print('Result not found')
+    
+    for a in result:
+        print(f'\nTotal: {a[0]}\n')
 
 def Third(x):
-    '''
-    Take customer ID (int) and database, then query
-    '''
-
+    # Take customer ID (int) and database, then query
+    # Print Order ID, Customer ID, Order Date, Order Status and Total Price
     query = '''
             SELECT orders.order_id, orders.customer_id, orders.order_date, orders.status, orders.total_amount
             FROM orders JOIN customers ON orders.customer_id=customers.customer_id
             WHERE customers.customer_id=?;
             '''
-    
     customer_id = input('Enter a customer ID:')
-
-    
     result = x.execute(query, (customer_id,))
+    print('')
 
-    written = result.fetchone()
-
-    if written:
-        print(written)
+    if result:
+        for a in result:
+                print(f'Order ID: {a[0]}\tCustomer ID: {a[1]}\tOrder Date: {a[2]}\tOrder Status: {a[3]}\tTotal Amount: {a[4]}')
     else:
         print('Result not found')
 
-def Fourth(x):
-    '''
-    Take price (int) and database, then query
-    '''
+    print('')
 
+def Fourth(x):
+    # Take price (int) and database, then query
+    # Print Product name, Category and Price
     query = '''
             SELECT products.name, category, price
             FROM products
             WHERE price<=?;
             '''
-    
     price = input('Enter a price:')
-
-    
     result = x.execute(query, (price,))
+    print('')
 
-    written = result.fetchone()
-
-    if written:
-        print(written)
+    if result:
+        for a in result:
+                print(f'Product Name: {a[0]}\nCategory: {a[1]}\tPrice: {a[2]}\n')
     else:
         print('Result not found')
 
-
+    print('')
 
 def menu():
     '''
     Print options and return choice (string)
     '''
-
     print('Please choose from the following options:\n')
-    print(f'4 - {task4}')
-    print(f'3 - {task3}')
-    print(f'2 - {task2}')
-    print(f'1 - {task1}')
+    print(f'4 - Show products that are or below a price')
+    print(f'3 - Show all orders of a customer')
+    print(f'2 - Count all customers')
+    print(f'1 - List all product categories')
     print('0 - Exit\n')
     print('What would you like to do? (Enter 0-4)')
     choice = '-1'
@@ -119,7 +98,6 @@ def menu():
 
 
 def main():
-
     db = get_connection()
 
     while True:
@@ -140,14 +118,6 @@ def main():
 
         elif choice == '4':
             Fourth(db)
-
-
-
-
-task1 = 'List all product categories'
-task2 = 'Count all customers'
-task3 = 'Show all orders of a customer'
-task4 = 'Show products that are or below a price'
 
 if __name__=="__main__":
     main()
