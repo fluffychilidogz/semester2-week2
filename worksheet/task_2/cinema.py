@@ -18,7 +18,18 @@ def customer_tickets(conn, customer_id):
     Include only tickets purchased by the given customer_id.
     Order results by film title alphabetically.
     """
-    pass
+
+    query = '''
+            SELECT title, screen, price 
+            FROM customers JOIN tickets ON customers.customer_id=tickets.customer_id
+            JOIN screenings ON tickets.screening_id=screenings.screening_id
+            JOIN films ON screenings.film_id=films.film_id
+            WHERE customers.customer_id=?
+            '''
+    execution = conn.execute(query, (customer_id,))
+    result = execution.fetchall()
+
+    return result
 
 
 def screening_sales(conn):
@@ -29,7 +40,18 @@ def screening_sales(conn):
     Include all screenings, even if tickets_sold is 0.
     Order results by tickets_sold descending.
     """
-    pass
+
+    query = '''
+            SELECT screenings.screening_id, title, COUNT(ticket_id) 
+            FROM customers LEFT JOIN tickets ON customers.customer_id=tickets.customer_id
+            LEFT JOIN screenings ON tickets.screening_id=screenings.screening_id
+            LEFT JOIN films ON screenings.film_id=films.film_id
+            GROUP BY screenings.screening_id
+            '''
+    execution = conn.execute(query)
+    result = execution.fetchall()
+
+    return result
 
 
 def top_customers_by_spend(conn, limit):
