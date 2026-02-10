@@ -25,6 +25,7 @@ def customer_tickets(conn, customer_id):
             JOIN screenings ON tickets.screening_id=screenings.screening_id
             JOIN films ON screenings.film_id=films.film_id
             WHERE customers.customer_id=?
+            ORDER BY film_title
             '''
     execution = conn.execute(query, (customer_id,))
     result = execution.fetchall()
